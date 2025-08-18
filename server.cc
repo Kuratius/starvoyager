@@ -137,11 +137,10 @@ void server::notifykill(player* ply)
 }
 
 
-void server::hail(player* fr,player* to,char* msg)
+void server::hail(player* fr,player* to,const char* msg)
 {
 	char txt[256]; //Communications text
 	char* frnm; //Name of from
-
 	if(!to)
 		return;
 
@@ -150,10 +149,17 @@ void server::hail(player* fr,player* to,char* msg)
 	{
 		frnm=fr->nam;
 		if(!frnm)
+        {
 			if(fr->in)
+            {
 				frnm=fr->in->cls;
+            }
 			else
-				frnm="";
+            {
+				frnm=NULL;
+            }
+
+        }
 		sprintf(txt,"%s: %s",frnm,msg);
 	}
 	else
@@ -176,7 +182,7 @@ void server::hail(player* fr,player* to,char* msg)
 	}
 }
 
-void server::bulletin(char* fmt,...)
+void server::bulletin(const char* fmt,...)
 {
 	char buf[132]; //Outgoing buffer
 	va_list fmts;
@@ -298,7 +304,7 @@ server::~server()
 	SDLNet_TCP_Close(sock);
 }
 
-void server::log(char* fmt,...)
+void server::log(const char* fmt,...)
 {
 	unsigned long ip; //ip of connecting client
 	octets* oip; //Ip as octets, for writing to Ip record
@@ -443,16 +449,26 @@ void server::action(int typ,short opr)
 						if(ply->in->enem==ply->in)
 							ply->in->enem=NULL;
 						if(ply->in->enem)
+                        {
 							if(ply->in->all->opposes(ply->in->enem->all))
+                            {
 								registersound(ply->in,SND_PROXIMITY);
+                            }
 							else
+                            {
 								registersound(ply->in,SND_BEEP2);
+                            }
+                        }
 					}
 				}
 				if(cmod==CMOD_SCAN || cmod==CMOD_HAIL || cmod==CMOD_WHOIS)
+                {
 					changecmod(cmod);
+                }
 				if(cmod==CMOD_REFIT)
+                {
 					changecmod(CMOD_HAIL);
+                }
 				break;
 
 				case CLIENT_CMOD:
@@ -1004,7 +1020,7 @@ void server::input()
 	}
 }
 
-void server::printtocons(char* fmt,...)
+void server::printtocons(const char* fmt,...)
 {
 	unsigned char buf[1028]; //Outgoing buffer
 	va_list fmts;
@@ -1031,7 +1047,7 @@ void server::spritetocons(int indx)
 	}
 }
 
-void server::printtomesg(char* fmt,...)
+void server::printtomesg(const char* fmt,...)
 {
 	unsigned char buf[132]; //Outgoing buffer
 	va_list fmts;

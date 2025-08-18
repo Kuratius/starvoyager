@@ -24,8 +24,8 @@ class server //Controls connections to players
 	static void cycle(); //Run one tick of the server
 	static void notifydelete(player* ply); //Tells the server system that a given player has been deleted
 	static void notifykill(player* ply); //Tells the server system that the given player has just been destroyed (does final preperations before ship is deleted)
-	static void hail(player* fr,player* to,char* msg); //Hail from one player to another with given message
-	static void bulletin(char* fmt,...); //Global bulletin to all players logged in
+	static void hail(player* fr,player* to,const char* msg); //Hail from one player to another with given message
+	static void bulletin(const char* fmt,...); //Global bulletin to all players logged in
 	static void registernoise(ship* fr,int snd); //Register a noise emitted from the given ship, of given sound index
 	static void registersound(ship* to,int snd); //Register a sound of given index, internal to the given ship
 	static void registershake(ship* to,int mag); //Command given ship to shake
@@ -35,16 +35,16 @@ class server //Controls connections to players
 	server(int self,TCPsocket sock); //Constructor for a client handler, give it the player number and the new incoming socket
 	~server(); //Destructor, closes socket
 
-	void log(char* fmt,...); //Output to the server log from this connection
+	void log(const char* fmt,...); //Output to the server log from this connection
 	void poll(); //Poll for client data and act on it	
 	void action(int typ,short opr); //Process an action from the client, given action type and operand
 	void changecmod(int opr); //Change to given client<->server console mode
 	void cons(int opr); //Receive a console impulse from the client, number given as operand
 	void requestline(bool hide); //Request a line of input from the client console, if secret (password mode) then specify
 	void input(); //Register that readline input has completed from the client, it's time to process it
-	void printtocons(char* fmt,...); //Print to the client's console display
+	void printtocons(const char* fmt,...); //Print to the client's console display
 	void spritetocons(int indx); //Bring up given index of sprite on clients console
-	void printtomesg(char* fmt,...); //Print an instant message to the client
+	void printtomesg(const char* fmt,...); //Print an instant message to the client
 	void uploads(); //Handle presence uploads to the client
 	void uploadplanets(); //Handle planet uploads
 	void uploadships(); //Handle ship uploads
