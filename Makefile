@@ -1,7 +1,7 @@
-PREFIX=$(DESTDIR)/usr
-DATADIR=$(PREFIX)/share/games/starvoyager
-DOCDIR=$(PREFIX)/share/doc/starvoyager
-BINDIR=$(PREFIX)/games
+PREFIX=build
+DATADIR=$(PREFIX)/data
+DOCDIR=$(PREFIX)/docs
+BINDIR=$(PREFIX)/bin
 NAME=starvoyager
 VERSION=0.5.0
 
