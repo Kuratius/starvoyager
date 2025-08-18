@@ -11,11 +11,22 @@
 #include <signal.h>
 #include "error.h"
 
-error::error(char* str)
+error::error(const char* str)
 {
+    char temp[129];
+    temp[128]='\0';
 	if(strlen(str)>128)
-		str[128]='\0';
-	strcpy(this->str,str);
+    {
+		//str[128]='\0';
+        printf("FATAL ERROR! STRING LENGTH EXCEEDS BUFFER SIZE \n"); 
+    }
+
+    for(int i=0; i<128;i++){
+        temp[i]=str[i];
+    }
+
+
+	strcpy(this->str,temp);
 }
 
 void error::debug(const char* str,long num)

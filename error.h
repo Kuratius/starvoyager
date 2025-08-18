@@ -9,7 +9,7 @@
 class error //Game failure exception (human readable by design)
 {
 	public:
-	error(char* str); //Constructor sets the string
+	error(const char* str); //Constructor sets the string
 
 	static void debug(const char* str,long num); //Prints a debug string and integer immediately to console
 
