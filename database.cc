@@ -164,22 +164,23 @@ void database::switchobj(char* nam)
 	}
 }
 
-char reusable_buffer[1024]={0};
+//char reusable_buffer[1024]={0};
 
 
-char* database::getvalue(const char* key,const char* val)
+void database::getvalue(const char* key,char* val)
 {
 	char srch[68]; //Key statement to search for	
 	char* fnd; //Pointer to found string
 	int lk; //Length of key
-	char* out; //Value to return
+	//char* out; //Value to return
 
-	out=&reusable_buffer[0];
-    strcpy(out, val);
+    //out=val;
+	//out=&reusable_buffer[0];
+    //strcpy(out, val);
 
 	lk=strlen(key);
 	if(lk>64)
-		return NULL;
+		return;
 	if(ostr)
 	{
 		sprintf(srch,"\n%s =",key);
@@ -196,18 +197,20 @@ char* database::getvalue(const char* key,const char* val)
 				fnd++;
 			for(int i=0;i<64 && *fnd!='\0' && *fnd!='\n';i++)
 			{
-				*out=*fnd;
-				out++;
+				//*out=*fnd;
+				*val=*fnd;
+				//out++;
+				val++;
 				fnd++;
 			}
-			*out='\0';
+			*val='\0';
 		}
 		else
-			out[0]='\0';
+			val[0]='\0';
 	}
 	else
-		out[0]='\0';
-	return out;
+		val[0]='\0';
+	return;
 }
 
 long database::getvalue(const char* key)
