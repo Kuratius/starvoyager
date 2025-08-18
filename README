@@ -5,3 +5,12 @@ E-mail: ret28@cam.ac.uk
 	Star Voyager is a Frontier/Elite class game in a more arcade style 2D environment, themed to the 'Star Trek' universe. It utilises the SDL library for portability, hence it should definitely run on all Linux platforms, and hopefully all *nixes supported by SDL. Windows and MacOS support is theoretically possible.
 	Please feel free to e-mail me regarding this game for help, praise or constructive criticism. I would also be quite grateful for anyone who could maintain game binaries in RPM and Debian package format, for any architecture. A Windows binary maintainer would also be very welcome.
 	Game controls are documented in the MANUAL file.
+
+
+------------------------------------------------
+
+This version should build without compiler errors.
+
+Building requires libsdl1.2-dev and libsdl-net1.2-dev.
+
+Create a folder called build and copy the contents of the data folder there, then run make. You may need to modify the Makefile if you want your executable inside the build folder and you may need to adjust the path to the data folder in that case.
