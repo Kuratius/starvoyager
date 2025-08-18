@@ -33,11 +33,11 @@ class database //Object database spanning multiple files
 	static void closereader(); //Closes the current writer
 	static void closewriter(); //Closes the current writer
 	static void switchobj(char* name); //Jump to the named object in the database, returning if it was found or not
-	static char* getvalue(char* key,char* val); //Get the value of the given attribute (space to put value should be specified)
-	static long getvalue(char* key); //As above, but value parsed to be an integer
+	static char* getvalue(const char* key,const char* val); //Get the value of the given attribute (space to put value should be specified)
+	static long getvalue(const char* key); //As above, but value parsed to be an integer
 	static void putobject(char* name); //Write the header of an object to the open writer
-	static void putvalue(char* key,char* val); //Write key=value to the open writer
-	static void putvalue(char* key,long val);
+	static void putvalue(const char* key,const char* val); //Write key=value to the open writer
+	static void putvalue(const char* key,long val);
 
 	private:
 	static void submitobj(FILE* strm,char* nam,long pos,long len); //Submit an object to the location hash, detailing which file it's in, its name, its position within the file and length within the file (strm is a filestream, dodgy workaround necessitates 'void')

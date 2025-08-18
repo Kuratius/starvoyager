@@ -26,7 +26,9 @@ void database::openreader(FILE* dbf)
 	int lr; //Length read from file
 	char* fnd; //String finding pointer
 	FILE* strm; //Open filestream
-	char onam[65]; //Object name found
+	//char onam[65]; //Object name found
+
+    char onam[2050];
 	long opos; //Object position found
 	char tmp[2049]; //Temporary reading buffer
 	reader* rstk; //Reader to put on the stack
@@ -162,14 +164,19 @@ void database::switchobj(char* nam)
 	}
 }
 
-char* database::getvalue(char* key,char* val)
+char reusable_buffer[1024]={0};
+
+
+char* database::getvalue(const char* key,const char* val)
 {
 	char srch[68]; //Key statement to search for	
 	char* fnd; //Pointer to found string
 	int lk; //Length of key
 	char* out; //Value to return
 
-	out=val;
+	out=&reusable_buffer[0];
+    strcpy(out, val);
+
 	lk=strlen(key);
 	if(lk>64)
 		return NULL;
@@ -189,11 +196,11 @@ char* database::getvalue(char* key,char* val)
 				fnd++;
 			for(int i=0;i<64 && *fnd!='\0' && *fnd!='\n';i++)
 			{
-				*val=*fnd;
-				val++;
+				*out=*fnd;
+				out++;
 				fnd++;
 			}
-			*val='\0';
+			*out='\0';
 		}
 		else
 			out[0]='\0';
@@ -203,9 +210,9 @@ char* database::getvalue(char* key,char* val)
 	return out;
 }
 
-long database::getvalue(char* key)
+long database::getvalue(const char* key)
 {
-	char val[65]; //String representation
+	char val[65]={0}; //String representation
 	long out; //Value to output
 
 	getvalue(key,val);
@@ -220,13 +227,13 @@ void database::putobject(char* nam)
 		fprintf(owrt,"@%s\n",nam);
 }
 
-void database::putvalue(char* key,char* val)
+void database::putvalue(const char* key,const char* val)
 {
 	if(owrt)
 		fprintf(owrt,"%s=%s\n",key,val);
 }
 
-void database::putvalue(char* key,long val)
+void database::putvalue(const char* key,long val)
 {
 	if(owrt)
 		fprintf(owrt,"%s=%ld\n",key,val);
