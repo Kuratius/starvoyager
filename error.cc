@@ -18,7 +18,7 @@ error::error(const char* str)
 	if(strlen(str)>128)
     {
 		//str[128]='\0';
-        printf("FATAL ERROR! STRING LENGTH EXCEEDS BUFFER SIZE \n"); 
+        printf("FATAL ERROR! STRING LENGTH EXCEEDS BUFFER SIZE \n");
     }
 
     for(int i=0; i<128;i++){
