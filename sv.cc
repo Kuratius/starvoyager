@@ -38,7 +38,7 @@ int main(int argc,char* argv[])
 	char path[sizeof(DATADIR)+16]; //Pathnames for databases
 	bool hles; //Headless?
 	bool bigs; //Big screen?
-	bool load; //Load universe on startup?
+	//bool load; //Load universe on startup?
 	bool full; //Fullscreen?
 	FILE* clog; //Crash log
 
@@ -62,7 +62,7 @@ int main(int argc,char* argv[])
 
 		hles=false;
 		bigs=false;
-		load=false;
+		//load=false;
 		full=false;
 
 		for(int i=1;i<argc;i++)
