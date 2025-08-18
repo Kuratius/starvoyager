@@ -18,8 +18,8 @@
 #include "error.h"
 #include "camera.h"
 
-#define x2screen(rx) (long)cx+(rx-pov.x)/vzm
-#define y2screen(ry) (long)cy+(ry-pov.y)/vzm
+#define x2screen(rx) (int32_t)cx+(rx-pov.x)/vzm
+#define y2screen(ry) (int32_t)cy+(ry-pov.y)/vzm
 
 void camera::init()
 {
@@ -166,7 +166,8 @@ void camera::rendermainview()
 	char txt[33]; //For rendering distance on the pointer
 	presence* tprs; //Pointer to objects to draw
 	int cx,cy; //Centering screen position
-	long sx,sy; //Screen co-ordinates
+	int32_t sx=0;
+    int32_t sy=0; //Screen co-ordinates
 	pol pptr;
 	vect vptr; //Pointer to target
 	graphic* ptr; //Pointer graphic
@@ -180,8 +181,8 @@ void camera::rendermainview()
 			tprs=presence::get(j);
 			if(tprs && tprs->typ==i)
 			{
-				sx=(long)x2screen(tprs->loc.x);
-				sy=(long)y2screen(tprs->loc.y);
+				sx=(int32_t)x2screen(tprs->loc.x);
+				sy=(int32_t)y2screen(tprs->loc.y);
 				if(sx>interface::viewb.x-100 && sx<interface::viewb.x+interface::viewb.w+100 && sy>interface::viewb.y-100 && sy<interface::viewb.y+interface::viewb.h+100)
 					tprs->drawat(sx,sy,vzm);
 						
@@ -196,7 +197,7 @@ void camera::rendermainview()
 		pptr=vptr.topol();
 		if(pptr.rad>(interface::viewb.w/5)*vzm)
 		{
-			sprintf(txt,"%ld",(long)pptr.rad/100);
+			sprintf(txt,"%" PRId32  "",(int32_t)pptr.rad/100);
 			pptr.rad=interface::viewb.w/2-50;
 			vptr=pptr.tovect();
 			vptr.xx+=interface::viewb.x+interface::viewb.w/2;
@@ -264,7 +265,9 @@ void camera::renderstars()
 
 void camera::renderradar()
 {
-	long sx,sy; //Screen co-ordinates
+
+	int32_t sx=0;
+    int32_t sy=0; //Screen co-ordinates
 	presence* tprs; //Pointer to objects to draw
 	char txt[125]; //For rendering co-ordinates on radar
 	int col=0; //Color to use on radar

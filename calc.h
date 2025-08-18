@@ -84,7 +84,7 @@ class ipol //Integer version of pol
 	inline ivect tovect(); //Returns conversion to an ivect
 
 	int ang;
-	long rad;
+	int32_t rad;
 };
 
 class ivect //Integer version of vect
@@ -92,8 +92,8 @@ class ivect //Integer version of vect
 	public:
 	inline ipol topol(); //Returns conversion to an ipol
 
-	long xx;
-	long yy;
+	int32_t xx;
+	int32_t yy;
 };
 
 inline ivect ipol::tovect()
@@ -102,8 +102,8 @@ inline ivect ipol::tovect()
 	double cang; //Converted angle
 
 	cang=(((double)ang-90)*M_PI)/180;
-	out.xx=(long)(rad*cos(cang));
-	out.yy=(long)(rad*sin(cang));
+	out.xx=(int32_t)(rad*cos(cang));
+	out.yy=(int32_t)(rad*sin(cang));
 	return out;
 }
 
@@ -111,7 +111,7 @@ inline ipol ivect::topol()
 {
 	ipol out; //Return value
 
-	out.rad=(long)sqrt(xx*xx+yy*yy);
+	out.rad=(int32_t)sqrt(xx*xx+yy*yy);
 	if(xx!=0)
 	{
 		out.ang=(int)((double)atan(yy/xx)*(180/M_PI));
@@ -148,28 +148,28 @@ struct cord //A co-ordinate in the game
 
 struct icord //Integer version of cord
 {
-	long x;
-	long y;
+	int32_t x;
+	int32_t y;
 };
 
 
 struct box //A universe bounding box
 {
-	long x1,y1; //Top-left corner
-	long x2,y2; //Top-right corner
+	int32_t x1,y1; //Top-left corner
+	int32_t x2,y2; //Top-right corner
 };
 
 class calc //Mathematics module
 {
         public:
 		static void init(); //Initialise some calculation data
-        static long rnd(long max); //Return random integer from 0 to max-1
-        static void getspeed(long spd,char* put); //Convert given game velocity to a string
-        inline static long dattolong(unsigned char* in) //Converts a four byte buffer portably into a long
+        static int32_t rnd(int32_t max); //Return random integer from 0 to max-1
+        static void getspeed(int32_t spd,char* put); //Convert given game velocity to a string
+        inline static int32_t dattolong(unsigned char* in) //Converts a four byte buffer portably into a long
 		{
 			Uint32 tmp; //Temporary value holder
 			unsigned char* tmpp=(unsigned char*)&tmp; //Accessor for tmp
-			long out; //Value to output
+			int32_t out; //Value to output
 
 			tmpp[0]=in[0];
 			tmpp[1]=in[1];
@@ -182,9 +182,9 @@ class calc //Mathematics module
 
 			return out;
 		}
-        inline static void longtodat(long in,unsigned char* out) //Puts a long portably into a four byte buffer
+        inline static void longtodat(int32_t in,unsigned char* out) //Puts a long portably into a four byte buffer
 		{
-			Uint32 tmp; //Temporary value holder
+			uint32_t tmp; //Temporary value holder
 			unsigned char* tmpp=(unsigned char*)&tmp; //Accessor for tmp
 
 			tmp=in+2147483647;
@@ -199,7 +199,7 @@ class calc //Mathematics module
 		}
         inline static int dattoint(unsigned char* in) //Converts a two byte buffer portably into a short
 		{
-			Uint16 tmp; //Temporary value holder
+			uint16_t tmp; //Temporary value holder
 			unsigned char* tmpp=(unsigned char*)&tmp; //Accessor for tmp
 			int out; //Value to output
 
@@ -212,9 +212,9 @@ class calc //Mathematics module
 
 			return out;
 		}
-        inline static void inttodat(short in,unsigned char* out) //Puts a long portably into a four byte buffer
+        inline static void inttodat(int16_t in,unsigned char* out) //Puts a long portably into a four byte buffer
 		{
-			Uint16 tmp; //Temporary value holder
+			uint16_t tmp; //Temporary value holder
 			unsigned char* tmpp=(unsigned char*)&tmp; //Accessor for tmp
 
 			tmp=in+32768;
@@ -229,6 +229,6 @@ class calc //Mathematics module
 		static void obscure(char* str); //Munges the string so it is no longer human readable; the munging is consisten, like a very weak crypt
 
         private:
-        static long wrp[10]; //Warp speed table
+        static int32_t wrp[10]; //Warp speed table
         static char spds[33]; //Speed string (saves having to malloc, but it ain't threadsafe!)
 };

@@ -24,14 +24,14 @@ void calc::init()
 	srand(os::getseed());
 }
 
-long calc::rnd(long max)
+int32_t calc::rnd(int32_t max)
 {
 	if(max==0)
 		return 0;
 	return (rand()%max);
 }
 
-void calc::getspeed(long spd,char* put)
+void calc::getspeed(int32_t spd,char* put)
 {
 	int j; //To extract the value from the loop
 
@@ -46,9 +46,9 @@ void calc::getspeed(long spd,char* put)
 	}
 	if(j==0)
 		if(spd<10)
-			sprintf(put,"0.0%ld c",spd);
+			sprintf(put,"0.0%" PRId32 " c",spd);
 		else
-			sprintf(put,"0.%ld c",spd);
+			sprintf(put,"0.%" PRId32 " c",spd);
 	else
 		sprintf(put,"Warp %hd",j);
 }
@@ -67,5 +67,5 @@ void calc::obscure(char* str)
 		str[i]+=i+1;
 }
 
-long calc::wrp[10];
+int32_t calc::wrp[10];
 char calc::spds[33];
