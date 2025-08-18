@@ -15,9 +15,9 @@ class interface //User interface module
 	static void init(); //Initialise datastructures
 	static void setup(); //Setup layout and stuff
 	static void poll(); //Main interface cycle, polling for keyboard and other input
-	static void printtocons(char* fmt,...); //Print to the game console
+	static void printtocons(const char* fmt,...); //Print to the game console
 	static void spritetocons(graphic* spr); //Draw an underlay sprite to the console
-	static void printtomesg(char* fmt,...); //Print to the message tickertape
+	static void printtomesg(const char* fmt,...); //Print to the message tickertape
 	static void render(); //Update the interface to screen
 	static bool getline(char* put,bool hide); //Make sure the editing buffer is active and return true if text has been entered and put it into the given string buffer, hide determining password field style
 

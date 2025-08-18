@@ -102,7 +102,7 @@ void interface::poll()
 	}
 }
 
-void interface::printtocons(char* fmt,...)
+void interface::printtocons(const char* fmt,...)
 {
 	va_list fmts; //To help parsing the vargs
 
@@ -121,7 +121,7 @@ void interface::spritetocons(graphic* spr)
 	cspr=spr;
 }
 
-void interface::printtomesg(char* fmt,...)
+void interface::printtomesg(const char* fmt,...)
 {
 	va_list fmts; //To help parsing the vargs
 	char txt[1024]; //Temporary text buffer
