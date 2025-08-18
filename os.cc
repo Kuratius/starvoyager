@@ -85,10 +85,10 @@ char* os::gettime()
 	return tbuf;
 }
 
-long os::getseed()
+int32_t os::getseed()
 {
 	#ifdef POSIX
-	return (long)time(NULL);
+	return (int32_t)time(NULL);
 	#else
 	return 12345;
 	#endif

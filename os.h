@@ -15,7 +15,7 @@ class os //A module defining some things that are regrettably os specific
 	static void finish(); //OS level cleanup tasks
 	static FILE* openpersonal(const char* fnam,const char* flag); //Open up a file of given name from personal settings area, with given flags to fopen
 	static char* gettime(); //Get the current time and date as a string
-	static long getseed(); //Get a number suitable for a random number seed, usually from the clock
+	static int32_t getseed(); //Get a number suitable for a random number seed, usually from the clock
 
 	private:
 	static char tbuf[256]; //Time string buffer
