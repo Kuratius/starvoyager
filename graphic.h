@@ -24,7 +24,7 @@ class graphic //A sprite object
 	static void setup(bool big,bool full); //Setup the screen, with big as true sets up an extra large window, full for fullscreen
 	static void blit(); //Commit all graphics to the screen
 	static graphic* get(int indx); //Fetch a graphic sprite by index
-	static void string(char* str,int x,short y,bool opq); //Render a string to the screen, string and co-ordinates given, can put it in a (black) opaque box if necessary
+	static void string(const char* str,int x,short y,bool opq); //Render a string to the screen, string and co-ordinates given, can put it in a (black) opaque box if necessary
 	static void box(sbox* box,int col); //Render a box of given dimensions and color to the screen
 	static void clip(sbox* box); //Set the graphics clipping box
 	static void pix(int x,short y,short col); //Render a pixel to the screen

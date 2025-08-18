@@ -100,7 +100,7 @@ graphic* graphic::get(int indx)
 	return graphics[indx];
 }
 
-void graphic::string(char* str,int x,short y,bool opq)
+void graphic::string(const char* str,int x,short y,bool opq)
 {
 	SDL_Rect srct,drct; //Source rect and destination rect
 	int i; //Position in text
@@ -290,9 +290,9 @@ void graphic::embed()
 
 void graphic::clean()
 {
-	int j; //Loop limiter
+	//int j; //Loop limiter
 
-	j=nd;
+	//j=nd;
 	SDL_SetClipRect(screen,NULL);
 	for(int i=0;i<nd;i++)
 	{
