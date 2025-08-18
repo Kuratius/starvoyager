@@ -266,8 +266,8 @@ void camera::renderradar()
 {
 	long sx,sy; //Screen co-ordinates
 	presence* tprs; //Pointer to objects to draw
-	char txt[33]; //For rendering co-ordinates on radar
-	int col; //Color to use on radar
+	char txt[125]; //For rendering co-ordinates on radar
+	int col=0; //Color to use on radar
 	sbox tbox; //Target drawing box
 	ipol pdir;
 	ivect vdir; //Direction of travel
