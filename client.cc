@@ -39,7 +39,7 @@ void client::stop()
 	}
 }
 
-void client::connect(char* host)
+void client::connect(const char* host)
 {
 	IPaddress serv; //Server address
 

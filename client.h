@@ -15,7 +15,7 @@ class client //Module to handle connection to servers
 	public:
 	static void init(); //Initialise the client datastructures
 	static void stop(); //Clean up and terminate client, disconnecting from the server
-	static void connect(char* host); //Connect to given host
+	static void connect(const char* host); //Connect to given host
 	static void flush(); //Flush connection buffers
 	static void poll(); //Run the client for a cycle, polling for new objects and acting on them
 	static void action(int typ,long opr); //Send an action to the server, given action number and operand
