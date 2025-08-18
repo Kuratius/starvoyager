@@ -555,15 +555,15 @@ int ship::interact(char* txt,short cmod,short opr,ship* mshp)
 				calc::getspeed(mwp,spd);
 				txt+=sprintf(txt,"Maximum velocity: %s\n",spd);
 				if(shd)
-					txt+=sprintf(txt,"Shield capability: %ld\n",shd->item->cap);
+					txt+=sprintf(txt,"Shield capability: %" PRId32 "\n",shd->item->cap);
 				else
 					txt+=sprintf(txt,"No shields");
 				if(pow)
-					txt+=sprintf(txt,"Maximum power capacity: %ld\n",pow->item->cap);
+					txt+=sprintf(txt,"Maximum power capacity: %" PRId32 "\n",pow->item->cap);
 				else
 					txt+=sprintf(txt,"No power plant");
 				if(ful)
-					txt+=sprintf(txt,"Maximum fuel storage: %ld\n",ful->item->cap);
+					txt+=sprintf(txt,"Maximum fuel storage: %" PRId32 "\n",ful->item->cap);
 				else
 					txt+=sprintf(txt,"No fuel storage");
 

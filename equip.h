@@ -6,6 +6,9 @@
 	If that file is not included with this source then permission is not given to use this source in any way whatsoever.
 */
 
+
+#include <stdint.h>
+
 class equip //Equipment item
 {
 	public:
@@ -25,11 +28,11 @@ class equip //Equipment item
 	int snd; //Associated sound index
 	int pow; //Power consumption
 	int rdy; //Readiness cycle time
-	long cap; //Capacity
-	long rng; //Range
+	int32_t cap; //Capacity
+	int32_t rng; //Range
 	int trck; //Tracking power
 	int acov; //Angle coverage
-	long cost; //Base cost
+	int32_t cost; //Base cost
 
 	private:
 	equip(int self); //Constructor, give the equipment self-index value
