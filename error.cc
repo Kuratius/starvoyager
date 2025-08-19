@@ -35,8 +35,8 @@ error::error(const char* str)
 
 }
 
-void error::debug(const char* str,long num)
+void error::debug(const char* str,int32_t num)
 {
-	printf("%s  %ld\n",str,num);
+	printf("%s  %" PRId32 "\n",str,num);
 	fflush(NULL);
 }
