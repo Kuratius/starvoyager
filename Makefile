@@ -8,17 +8,10 @@ VERSION=0.5.0
 CPPC=c++
 CC=cc
 UNAME := $(shell uname -m)
-ifeq ($(UNAME), x86_64)
-	LIBS:=`sdl-config --libs` -lSDL_net -lstdc++ -lm
-else
-	LIBS:=`sdl-config --libs` -lSDL_net -lstdc++
-endif
+LIBS:=`sdl-config --libs` -lSDL_net -lstdc++ -lm
 CFLAGS:=`sdl-config --cflags` -Wall -ggdb3
-ifneq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
-CFLAGS += -O0
-else
 CFLAGS += -O2
-endif
+CXXFLAGS= $(CFLAGS)
 #CFLAGS:=`sdl-config --cflags` -ggdb3 -Wall -Werror -ansi -pedantic
 PACKAGENAME=$(NAME)-$(VERSION)-`uname -m`-`uname|tr [A-Z] [a-z]`.bin
 .SUFFIXES: .c .cc
