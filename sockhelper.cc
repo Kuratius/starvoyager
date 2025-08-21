@@ -102,16 +102,16 @@ void sockhelper::suck()
 	}
 }
 
-long sockhelper::getcount()
+uint32_t sockhelper::getcount()
 {
-	long out; //Value to return
+	uint32_t out; //Value to return
 
 	out=cnt;
 	cnt=0;
 	return out;
 }
 
-Uint32 sockhelper::alarmcallback(Uint32 dly,void* from)
+uint32_t sockhelper::alarmcallback(uint32_t dly,void* from)
 {
 	((sockhelper*)from)->blck=true;
 	return 0;
