@@ -229,6 +229,6 @@ class calc //Mathematics module
 		static void obscure(char* str); //Munges the string so it is no longer human readable; the munging is consisten, like a very weak crypt
 
         private:
-        static int32_t wrp[10]; //Warp speed table
-        static char spds[33]; //Speed string (saves having to malloc, but it ain't threadsafe!)
+        static const int32_t wrp[10]; //Warp speed table
+        //static char spds[33]; //Speed string (saves having to malloc, but it ain't threadsafe!)
 };

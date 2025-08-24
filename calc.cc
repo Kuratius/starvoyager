@@ -15,12 +15,18 @@
 #include "os.h"
 
 
+const int32_t calc::wrp[10]={100*0, 100*1, 100*2*2*2, 100*3*3*3,100*4*4*4, 100*5*5*5, 100*6*6*6,100*7*7*7, 100*8*8*8,100*9*9*9};
+//char calc::spds[33];
+
+
 void calc::init()
 {
+/*
 	for(int i=0;i<10;i++)
 	{
 		wrp[i]=i*i*i*100;
 	}
+*/
 	srand(os::getseed());
 }
 
@@ -67,5 +73,3 @@ void calc::obscure(char* str)
 		str[i]+=i+1;
 }
 
-int32_t calc::wrp[10];
-char calc::spds[33];
