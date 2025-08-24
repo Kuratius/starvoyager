@@ -167,7 +167,7 @@ class calc //Mathematics module
         static void getspeed(int32_t spd,char* put); //Convert given game velocity to a string
         inline static int32_t dattolong(unsigned char* in) //Converts a four byte buffer portably into a long
 		{
-			Uint32 tmp; //Temporary value holder
+			uint32_t tmp; //Temporary value holder
 			unsigned char* tmpp=(unsigned char*)&tmp; //Accessor for tmp
 			int32_t out; //Value to output
 
