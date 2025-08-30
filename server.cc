@@ -143,6 +143,7 @@ void server::hail(player* fr,player* to,const char* msg)
 	char* frnm; //Name of from
 	if(!to)
 		return;
+    char empty[1]={0};
 
 	frnm=NULL;
 	if(fr)
@@ -156,7 +157,7 @@ void server::hail(player* fr,player* to,const char* msg)
             }
 			else
             {
-				frnm=NULL;
+				frnm=&empty[0];
             }
 
         }
@@ -259,7 +260,7 @@ void server::quitsignal(int sig)
 
 server::server(int self,TCPsocket sock)
 {
-	unsigned long ip; //ip of connecting client
+	uint32_t ip; //ip of connecting client
 	octets* oip; //Ip as octets, for writing to Ip record
 
 	this->self=self;
@@ -306,7 +307,7 @@ server::~server()
 
 void server::log(const char* fmt,...)
 {
-	unsigned long ip; //ip of connecting client
+	uint32_t ip; //ip of connecting client
 	octets* oip; //Ip as octets, for writing to Ip record
 	va_list fmts; //For resolving the format string
 
@@ -330,7 +331,7 @@ void server::poll()
 {
 	int typ,opr; //Action description
 	unsigned char* buf; //Incoming data buffer
-	long sbnd; //Server bandwidth used by this player
+	uint64_t sbnd; //Server bandwidth used by this player
 	unsigned char fldb[SERV_FLOOD_SZ]; //Flooding buffer
 
 	hlpr->pump();
@@ -531,10 +532,10 @@ void server::action(int typ,short opr)
 				break;
 
 				case CLIENT_BANDWIDTH:
-				if(opr>cbnd)
+				if(opr>(int64_t)cbnd)
 				{
 					cbnd=opr;
-					log("Bandwidth exploration reports %ld maximum",cbnd);
+					log("Bandwidth exploration reports " PRIu32 " maximum",cbnd);
 				}
 				break;
 
@@ -1279,7 +1280,7 @@ void server::hilight(ship* tshp)
 }
 
 server* server::connections[ISIZE];
-long server::tcks;
+uint32_t server::tcks;
 TCPsocket server::lstn;
 bool server::qsig;
 FILE* server::logf;
