@@ -66,7 +66,7 @@ void client::poll()
 	sound* snd; //Sound to play
 	graphic* cspr; //Console sprite
 	int n; //Array subscript to access
-	long cbnd; //Client bandwidth usage to report
+	uint32_t cbnd; //Client bandwidth usage to report
 	presence* from; //Sound source if applicable
 	int len; //Length of console/message text if applicable
 	char txt[1025]; //Text to print to console

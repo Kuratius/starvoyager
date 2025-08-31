@@ -53,7 +53,7 @@ class server //Controls connections to players
 	void hilight(ship* tshp); //Hilight the given ship to this player
 
 	static server* connections[ISIZE]; //Server objects for each possible client
-	static long tcks; //Server ticks so far
+	static uint32_t tcks; //Server ticks so far
 	static TCPsocket lstn; //Listener socket
 	static bool qsig; //Quit signal?
 	static FILE* logf; //Log file
@@ -75,6 +75,6 @@ class server //Controls connections to players
 	int lsnd; //Last sound registered, to prevent repetitions
 	int foc; //Focus target of this player's clientside presence
 	int urat; //Upload rate divider
-	long cbnd; //Client bandwidth report
+	uint32_t cbnd; //Client bandwidth report
 	int tout; //Connection timeout
 };
