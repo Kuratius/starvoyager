@@ -483,7 +483,7 @@ void presence::interpolate()
 	//	return;
 	if(this==me)
 	{
-		vel=mov.topol();
+		vel=ivecttopol(mov);
 		vel.ang=ang;
 	}
 	loc.x+=mov.xx;

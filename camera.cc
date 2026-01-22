@@ -193,12 +193,14 @@ void camera::rendermainview()
     {
         vptr.xx=presence::trg->loc.x-pov.x;
         vptr.yy=presence::trg->loc.y-pov.y;
-        pptr=vptr.topol();
+        //pptr=vptr.topol();
+        pptr=vecttopol(vptr);
         if(pptr.rad>(interface::viewb.w/5)*vzm)
         {
             sprintf(txt,"%" PRId32  "",(int32_t)pptr.rad/100);
             pptr.rad=interface::viewb.w/2-50;
-            vptr=pptr.tovect();
+            //vptr=pptr.tovect();
+            vptr=poltovect(pptr);
             vptr.xx+=interface::viewb.x+interface::viewb.w/2;
             vptr.yy+=interface::viewb.y+interface::viewb.h/2;
             ptr=graphic::get(graphic::NAV);
@@ -344,7 +346,8 @@ void camera::renderradar()
 
                 if(tprs->typ==PT_SHIP)
                 {
-                    pdir=tprs->mov.topol();
+                    //pdir=tprs->mov.topol();
+                    pdir=ivecttopol(tprs->mov);
                     if(pdir.rad!=0)
                     {
                         vdir.xx=(tprs->mov.xx*7)/pdir.rad;

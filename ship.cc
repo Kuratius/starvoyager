@@ -339,7 +339,7 @@ void ship::shoot(bool torp)
 			lnch=slots[i].item;
 			vtrg.xx=enem->loc.x-loc.x;
 			vtrg.yy=enem->loc.y-loc.y;
-			ptrg=vtrg.topol();
+			ptrg=vecttopol(vtrg);
 			dis=ptrg.rad;
 
 			can=false;
@@ -354,7 +354,7 @@ void ship::shoot(bool torp)
 						vtrg.xx+=corr.xx;
 					if(vtrg.yy && corr.yy*10/vtrg.yy<10)
 						vtrg.yy+=corr.yy;
-					ptrg=vtrg.topol();
+					ptrg=vecttopol(vtrg);
 					ptrg.rad=dis;
 				}
 			}
@@ -389,7 +389,7 @@ void ship::shoot(bool torp)
 				ptmp.ang=(ptmp.ang+vel.ang);
 				if(ptmp.ang>=360)
 					ptmp.ang-=360;
-				vtmp=ptmp.tovect();
+				vtmp=poltovect(ptmp);
 				
 				cemt.x=vtmp.xx+loc.x;
 				cemt.y=vtmp.yy+loc.y;
@@ -407,7 +407,7 @@ void ship::shoot(bool torp)
 					pemt.rad=lnch->trck;
 				}
 
-				vemt=pemt.tovect();
+				vemt=poltovect(pemt);
 				vemt.xx+=mov.xx;
 				vemt.yy+=mov.yy;
 
@@ -1146,7 +1146,7 @@ void ship::transport(planet* to)
 
 	vto.xx=to->loc.x-loc.x;
 	vto.yy=to->loc.y-loc.y;
-	pto=vto.topol();
+	pto=vecttopol(vto);
 	if(shd && shd->cap>0)
 		throw error("Cannot transport with shields up");
 	if(!pow)
@@ -1173,7 +1173,7 @@ void ship::transport(ship* to)
 
 	vto.xx=to->loc.x-loc.x;
 	vto.yy=to->loc.y-loc.y;
-	pto=vto.topol();
+	pto=vecttopol(vto);
 	if(shd && shd->cap>0)
 		throw error("Cannot transport with shields up");
 	if(!pow)
@@ -1273,10 +1273,10 @@ void ship::load()
 	{
 		bpol.ang=i*10;
 		bpol.rad=h[0];
-		vct1=bpol.tovect();
+		vct1=poltovect(bpol);
 		bpol.ang=(i*10+90)%360;
 		bpol.rad=w[0];
-		vct2=bpol.tovect();
+		vct2=poltovect(bpol);
 		if(vct1.xx<0)
 			vct1.xx=-vct1.xx;
 		if(vct2.xx<0)
@@ -1422,7 +1422,7 @@ void ship::physics()
 	if(loc.y<-LIMIT)
 		loc.y=-LIMIT;
 	
-	nmov=vel.tovect();
+	nmov=poltovect(vel);
 	if(vel.rad<100 && (mss/100)!=0)
 	{
 		mov.xx+=(nmov.xx-mov.xx)/(mss/100);
@@ -1450,7 +1450,7 @@ void ship::autonav(planet* tpln)
 	vtrg.xx=(self*497)%800-400+tpln->loc.x-loc.x;
 	vtrg.yy=(self*273)%800-400+tpln->loc.y-loc.y; //Vector to deterministic but arbitrary location near target planet
 
-	ptrg=vtrg.topol(); //...make polar
+	ptrg=vecttopol(vtrg); //...make polar
 
 	dd=ptrg.ang-vel.ang;
 	if(dd>180)
@@ -1504,11 +1504,11 @@ void ship::follow(ship* tshp)
 
 	ptrg.ang=tshp->vel.ang+90+(self*29)%180; //Find deterministic formation angle to hold at around target ship
 	ptrg.rad=100+(self*17)%((sens ? sens->item->rng : 1000)/16); //Deterministic range to hold based on sensor range
-	vtrg=ptrg.tovect();
+	vtrg=poltovect(ptrg);
 		
 	vtrg.xx+=tshp->loc.x-loc.x;
 	vtrg.yy+=tshp->loc.y-loc.y;
-	ptrg=vtrg.topol(); //Get polar vector to this formation position
+	ptrg=vecttopol(vtrg); //Get polar vector to this formation position
 
 	dd=ptrg.ang-vel.ang;
 	if(dd>180)
@@ -1574,11 +1574,11 @@ void ship::attackpattern(ship* tshp,int str)
 	else
 		ptrg.ang=tshp->vel.ang-45-(str+self*29)%135;
 	ptrg.rad=100+(self*17)%((str+(sens ? sens->item->rng : 1000))/16); //Back off a little depending on sensor range
-	vtrg=ptrg.tovect();
+	vtrg=poltovect(ptrg);
 		
 	vtrg.xx+=tshp->loc.x-loc.x;
 	vtrg.yy+=tshp->loc.y-loc.y;
-	ptrg=vtrg.topol(); //And finally get a polar to the 'formation' position
+	ptrg=vecttopol(vtrg); //And finally get a polar to the 'formation' position
 
 	dd=ptrg.ang-vel.ang;
 	if(dd>180)

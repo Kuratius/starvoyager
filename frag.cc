@@ -214,13 +214,13 @@ void frag::home()
 
 	trv.xx=((trg->loc.x+trg->mov.xx)-(loc.x+mov.xx));
 	trv.yy=((trg->loc.y+trg->mov.yy)-(loc.y+mov.yy));
-	trp=trv.topol();
+	trp=vecttopol(trv);
 
 	//Enforce acceleration restriction
 	if(trp.rad>trck)
 		trp.rad=trck;
 
-	trv=trp.tovect();
+	trv=poltovect(trp);
 	mov.xx+=trv.xx;
 	mov.yy+=trv.yy;
 }

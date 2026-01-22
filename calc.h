@@ -14,54 +14,56 @@
 #define M_PI 3.14159265358979323846
 #endif
 
-class vect;
-class pol //A polar vector
+struct vect //A vector
 {
-	public:
-	inline vect tovect(); //Returns conversion to a vect
-
-        double ang; //Angle
-	double rad; //Radius
-};
-
-class vect //A vector
-{
-	public:
-	inline pol topol(); //Returns conversion to a pol
+	//public:
+	//inline pol topol(); //Returns conversion to a pol
 	
 	double xx;
 	double yy; //X and Y components
 };
 
-inline vect pol::tovect()
+
+struct pol //A polar vector
 {
-	vect out; //Return value
+	//public:
+	//inline vect tovect(); //Returns conversion to a vect
+
+    double ang; //Angle
+	double rad; //Radius
+};
+
+
+
+inline struct vect poltovect(struct pol p)
+{
+	struct vect out; //Return value
 	double cang; //Converted angle
 
-	cang=((ang-90)*M_PI)/180;
-	out.xx=rad*cos(cang);
-	out.yy=rad*sin(cang);
+	cang=((p.ang-90)*M_PI)/180;
+	out.xx=p.rad*cos(cang);
+	out.yy=p.rad*sin(cang);
 	return out;
 }
 
-inline pol vect::topol()
+inline struct pol vecttopol(struct vect v)
 {
-	pol out; //Return value
+	struct pol out; //Return value
 
-	out.rad=sqrt(xx*xx+yy*yy);
-	if(xx!=0)
+	out.rad=sqrt(v.xx*v.xx+v.yy*v.yy);
+	if(v.xx!=0)
 	{
-		out.ang=atan(yy/xx)*(180/M_PI);
-		if(yy>0)
+		out.ang=atan(v.yy/v.xx)*(180/M_PI);
+		if(v.yy>0)
 		{
-			if(xx>0)
+			if(v.xx>0)
 				out.ang=90+out.ang;
 			else
 				out.ang=270+out.ang;
 		}
 		else
 		{
-			if(xx>0)
+			if(v.xx>0)
 				out.ang=90+out.ang;
 			else
 				out.ang=360-(90-out.ang);
@@ -69,7 +71,7 @@ inline pol vect::topol()
 	}
 	else
 	{
-		if(yy>0)
+		if(v.yy>0)
 			out.ang=180;
 		else
 			out.ang=0;
@@ -77,54 +79,52 @@ inline pol vect::topol()
 	return out;
 }
 
-class ivect;
-class ipol //Integer version of pol
+struct ivect //Integer version of vect
 {
-	public:
-	inline ivect tovect(); //Returns conversion to an ivect
-
-	int ang;
-	int32_t rad;
-};
-
-class ivect //Integer version of vect
-{
-	public:
-	inline ipol topol(); //Returns conversion to an ipol
-
+	//public:
+	//inline ipol topol(); //Returns conversion to an ipol
 	int32_t xx;
 	int32_t yy;
 };
 
-inline ivect ipol::tovect()
+
+struct ipol //Integer version of pol
 {
-	ivect out; //Return value
+	//public:
+	//inline ivect tovect(); //Returns conversion to an ivect
+	int ang;
+	int32_t rad;
+};
+
+inline struct ivect ipoltovect(struct ipol ip)
+{
+	struct ivect out; //Return value
 	double cang; //Converted angle
 
-	cang=(((double)ang-90)*M_PI)/180;
-	out.xx=(int32_t)(rad*cos(cang));
-	out.yy=(int32_t)(rad*sin(cang));
+	cang=(((double)ip.ang-90)*M_PI)/180;
+	out.xx=(int32_t)(ip.rad*cos(cang));
+	out.yy=(int32_t)(ip.rad*sin(cang));
 	return out;
 }
 
-inline ipol ivect::topol()
+inline struct ipol ivecttopol(struct ivect iv)
 {
-	ipol out; //Return value
+	struct ipol out; //Return value
 
-	out.rad=(int32_t)sqrt(xx*xx+yy*yy);
-	if(xx!=0)
+	out.rad=(int32_t)sqrt(iv.xx*iv.xx+iv.yy*iv.yy);
+	if(iv.xx!=0)
 	{
-		out.ang=(int)((double)atan(yy/xx)*(180/M_PI));
-		if(yy>0)
+		out.ang=(int)((double)atan(iv.yy/iv.xx)*(180/M_PI));
+		if(iv.yy>0)
 		{
-			if(xx>0)
+			if(iv.xx>0)
 				out.ang=90+out.ang;
 			else
 				out.ang=270+out.ang;
 		}
 		else
 		{
-			if(xx>0)
+			if(iv.xx>0)
 				out.ang=90+out.ang;
 			else
 				out.ang=360-(90-out.ang);
@@ -132,7 +132,7 @@ inline ipol ivect::topol()
 	}
 	else
 	{
-		if(yy>0)
+		if(iv.yy>0)
 			out.ang=180;
 		else
 			out.ang=0;
