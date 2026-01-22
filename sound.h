@@ -42,8 +42,8 @@ class sound //A sound in the database
 	static sound* sounds[ISIZE]; //Playable sound index
 
 	int self; //Self-index value of sound
-	Uint8* buff; //Audio buffer
-	Uint32 blen; //Buffer length
+	uint8_t * buff; //Audio buffer
+	uint32_t blen; //Buffer length
 	bool imem; //In memory and loaded?
 	bool miss; //Sound missing? Keep this as a record and try not to load it again
 };
