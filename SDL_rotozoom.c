@@ -42,11 +42,11 @@ int zoomSurfaceRGBA(SDL_Surface * src, SDL_Surface * dst, int smooth)
 	/*
 	 * smaller to avoid overflow on right and bottom edge.     
 	 */
-	sx = (int) (65536.0 * (float) (src->w - 1) / (float) dst->w);
-	sy = (int) (65536.0 * (float) (src->h - 1) / (float) dst->h);
+	sx = (int) (65536.0f * (float) (src->w - 1) / (float) dst->w);
+	sy = (int) (65536.0f * (float) (src->h - 1) / (float) dst->h);
     } else {
-	sx = (int) (65536.0 * (float) src->w / (float) dst->w);
-	sy = (int) (65536.0 * (float) src->h / (float) dst->h);
+	sx = (int) (65536.0f * (float) src->w / (float) dst->w);
+	sy = (int) (65536.0f * (float) src->h / (float) dst->h);
     }
 
     /*
@@ -221,8 +221,8 @@ int zoomSurfaceY(SDL_Surface * src, SDL_Surface * dst)
     /*
      * Variable setup 
      */
-    sx = (Uint32) (65536.0 * (float) src->w / (float) dst->w);
-    sy = (Uint32) (65536.0 * (float) src->h / (float) dst->h);
+    sx = (Uint32) (65536.0f * (float) src->w / (float) dst->w);
+    sy = (Uint32) (65536.0f * (float) src->h / (float) dst->h);
 
     /*
      * Allocate memory for row increments 
