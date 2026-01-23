@@ -1,16 +1,6 @@
 Immediate
--
-~~Try and add autotools (Makefile.am, configure.ac) so it compiles on any 32/64 bit system~~
-Cancelled, will keep it as a Makefile or add a build.zig.
-
-
-  without having to resort to hacking the Makefile every time.
 Find out how to increase the screen size.
-
-Figure out feasibility of porting to C <-More platforms can be supported.
-
 Remove remaining float code or change double to single precision floats where appropriate.
-
 Put sdl-related code into separate section, provide implementations compatible with nds.
 
 
