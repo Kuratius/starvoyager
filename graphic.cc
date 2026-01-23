@@ -25,7 +25,6 @@ void graphic::init()
 
 void graphic::setup(bool big,bool full)
 {
-#ifdef LINUX
     Uint32 flags; //Flags for setting video;
     SDL_Surface* tmp; //Temporary holding place while sprites are converted
     char* path; //Path to load bmp from
@@ -83,10 +82,6 @@ void graphic::setup(bool big,bool full)
     SDL_FreeSurface(cloak);
     cloak=tmp;
     SDL_SetColorKey(cloak,SDL_SRCCOLORKEY|SDL_RLEACCEL,cols[WHITE]);
-#else
-//What to do on nds?
-
-#endif
 }
 
 void graphic::blit()
