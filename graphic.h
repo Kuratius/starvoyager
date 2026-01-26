@@ -35,7 +35,7 @@ class graphic //A sprite object
 
     void draw(int x,short y,short rot,short zout,short haze,bool trg); //Draw this graphic at given co-ordinates, rotation and zoom-out, with given haze percentage. trg determines if targetting crosshairs are drawn
 
-    private:
+ 
     enum {DTYP_PIX,DTYP_LINE,DTYP_RECT,DTYP_CLIP}; //Drawn types (see dtyp)
     
     graphic(int indx); //Constructor to create a clean graphic object

@@ -30,7 +30,8 @@
 #include "game.h"
 #include "player.h"
 #include "os.h"
-
+//extern SDL_Renderer * renderer;
+extern SDL_Surface * screen;
 void splashscreen(); //Splashscreen function
 
 int main(int argc,char* argv[])
@@ -175,19 +176,26 @@ void splashscreen()
         }
         poll.tick();
         interface::poll();
-        switch(interface::lasc)
+        SDL_Texture * tex=NULL;
+        switch(interface::scancode)
         {
-            case '1':
+            case SDL_SCANCODE_1:
             interface::printtomesg("Initialising game...");    
             interface::render();
             graphic::clip(&interface::viewb);
             graphic::box(&interface::viewb,graphic::BLACK);
             graphic::blit();
+            //tex=SDL_CreateTextureFromSurface(renderer, screen);
+            //if (!tex) printf("failed to create texture from screen surface\n");
+            //SDL_RenderCopy(renderer,tex, NULL, NULL );
+		    //SDL_RenderPresent(renderer);
+            //SDL_DestroyTexture(tex);
+            //tex=NULL;
             game::runlocal();
             rset=true;
             break;
 
-            case '2':
+            case SDL_SCANCODE_2:
             wipe=os::openpersonal("universe.svd","w");
             if(wipe)
                 fclose(wipe);
@@ -195,7 +203,7 @@ void splashscreen()
             rset=true;
             break;
 
-            case '3':
+            case SDL_SCANCODE_3:
             while(!interface::getline(host,false))
             {
                 interface::render();
@@ -210,8 +218,8 @@ void splashscreen()
             rset=true;
             break;
 
-            case '4':
-            case 'q':
+            case SDL_SCANCODE_4:
+            case SDL_SCANCODE_Q:
             throw error("User quit");
             break;
 

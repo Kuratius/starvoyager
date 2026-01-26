@@ -285,6 +285,7 @@ void client::poll()
 
 void client::action(int typ,long opr)
 {
+    //printf("action!\n");
 	unsigned char buf[3]; //Outgoing buffer
 
 	if(opr>32767)
@@ -298,6 +299,7 @@ void client::action(int typ,long opr)
 
 void client::readln()
 {
+    //printf("reading line\n");
 	char txt[65]; //Readline text
 
 	if(interface::getline(txt,hide))
@@ -305,6 +307,7 @@ void client::readln()
 		edit=false;
 		for(int i=0;i<65;i++)
 		{
+            //printf("action!\n");
 			action(CLIENT_CHAR,txt[i]);
 			if(txt[i]=='\0')
 				break;

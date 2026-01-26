@@ -32,7 +32,8 @@ void interface::setup()
 	sbox tot; //Total screen area
 
 	tot=graphic::dimension();
-
+    tot.h=400;
+    tot.w=600;
 	viewb.x=tot.x;
 	viewb.y=tot.y;
 	viewb.w=tot.h;
@@ -73,8 +74,8 @@ void interface::setup()
 	cons=new char[(consb.w/7)*(consb.h/7)];
 	cons[0]='\0';
 
-	SDL_EnableUNICODE(1);
-	SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY,SDL_DEFAULT_REPEAT_INTERVAL);
+	//SDL_EnableUNICODE(1);
+	//SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY,SDL_DEFAULT_REPEAT_INTERVAL);
 
 	mtmo=0;
 }
@@ -83,17 +84,17 @@ void interface::poll()
 {
 	SDL_Event evnt; //Event to be polled
 	int n; //Unused area for the argument for SDL_GetKeyState
-
 	lkey=-1;
 	lasc=0;
 	SDL_PumpEvents();
-	keys=SDL_GetKeyState(&n);
+	keys=SDL_GetKeyboardState(&n);
 	while(lkey==-1 && SDL_PollEvent(&evnt))
 	{
 		if(evnt.type==SDL_KEYDOWN)
 		{
 			lkey=evnt.key.keysym.sym;
-			lasc=evnt.key.keysym.unicode;
+			scancode=evnt.key.keysym.scancode;
+			lasc=*SDL_GetScancodeName(evnt.key.keysym.scancode);
 			if(inp)
 				lineedit();
 		}
@@ -250,16 +251,18 @@ sbox interface::viewb,interface::radarb,interface::barsb,interface::panelb;
 bool interface::inp;
 int interface::lkey;
 unsigned char interface::lasc;
-unsigned char* interface::keys;
+const uint8_t* interface::keys;
+int interface::scancode;
 
+int getCharFromSDL_SCANCODE(int scancode);
 void interface::lineedit() //Function to handle line-editing
 {
-	if(lkey==SDLK_RETURN)
+	if(scancode==SDL_SCANCODE_RETURN)
 	{
 		ent=true;
 		return;
 	}
-	if(lkey==SDLK_BACKSPACE)
+	if(scancode==SDL_SCANCODE_BACKSPACE)
 	{
 		for(int i=1;i<65;i++)
 		{
@@ -276,6 +279,8 @@ void interface::lineedit() //Function to handle line-editing
 		{
 			if(edit[i]=='\0')
 			{
+			    //char * s=SDL_GetScancodeName(lasc);
+                //printf("got: %s\n", s);
 				edit[i]=lasc;
 				edit[i+1]='\0';
 				break;
@@ -283,6 +288,94 @@ void interface::lineedit() //Function to handle line-editing
 		}
 	}
 }
+
+
+int getCharFromSDL_SCANCODE(int scancode){
+    switch (scancode){
+        case SDL_SCANCODE_0:
+            return '0'; 
+        case SDL_SCANCODE_1:
+            return '1';
+        case SDL_SCANCODE_2:
+            return '2';
+
+        case SDL_SCANCODE_3:
+            return '3';
+
+        case SDL_SCANCODE_4:
+            return '4';
+
+        case SDL_SCANCODE_5:
+            return '5';
+
+        case SDL_SCANCODE_6:
+            return '6';
+
+        case SDL_SCANCODE_7:
+            return '7';
+        case SDL_SCANCODE_8:
+            return '8';
+        case SDL_SCANCODE_9:
+            return '9';
+        case SDL_SCANCODE_A:
+            return 'A';
+        case SDL_SCANCODE_B:
+            return 'B';
+        case SDL_SCANCODE_C:
+            return 'C';
+        case SDL_SCANCODE_D:
+            return 'D';
+        case SDL_SCANCODE_E:
+            return 'E';
+        case SDL_SCANCODE_F:
+            return 'F';
+        case SDL_SCANCODE_G:
+            return 'G';
+        case SDL_SCANCODE_H:
+            return 'H';
+        case SDL_SCANCODE_I:
+            return 'I';
+        case SDL_SCANCODE_J:
+            return 'J';
+        case SDL_SCANCODE_K:
+            return 'K';
+        case SDL_SCANCODE_L:
+            return 'L';
+        case SDL_SCANCODE_M:
+            return 'M';
+        case SDL_SCANCODE_N:
+            return 'N';
+        case SDL_SCANCODE_O:
+            return 'O';
+        case SDL_SCANCODE_P:
+            return 'P';
+        case SDL_SCANCODE_Q:
+            return 'Q';
+        case SDL_SCANCODE_R:
+            return 'R';
+        case SDL_SCANCODE_S:
+            return 'S';
+        case SDL_SCANCODE_T:
+            return 'T';
+        case SDL_SCANCODE_U:
+            return 'U';
+        case SDL_SCANCODE_V:
+            return 'V';
+        case SDL_SCANCODE_X:
+            return 'X';
+        case SDL_SCANCODE_Y:
+            return 'Y';
+        case SDL_SCANCODE_Z:
+            return 'Z';
+        default:
+        return '?';
+    }   
+
+
+}
+
+
+
 
 sbox interface::mesgb;
 sbox interface::editb;

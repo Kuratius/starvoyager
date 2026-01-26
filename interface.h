@@ -25,7 +25,8 @@ class interface //User interface module
 	static bool inp; //In input mode?
 	static int lkey; //Keysym of last key pressed
 	static unsigned char lasc; //Ascii value of last key pressed
-	static unsigned char* keys; //Pointer to keyboard state
+	static int scancode; //SDL2 scancode of last key pressed
+	static const uint8_t * keys; //Pointer to keyboard state
 
 	private:
 	static void lineedit(); //Function to handle line-editing

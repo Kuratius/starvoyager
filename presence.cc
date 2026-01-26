@@ -163,62 +163,62 @@ void presence::render()
 void presence::controls()
 {
 	presence* trg; //Target
-	
+    //printf("checking controls\n");	
 	trg=NULL;
-	if(interface::keys[SDLK_LEFT])
+	if(interface::keys[SDL_SCANCODE_LEFT])
 		client::action(CLIENT_TURN,-1);
-	if(interface::keys[SDLK_RIGHT])
+	if(interface::keys[SDL_SCANCODE_RIGHT])
 		client::action(CLIENT_TURN,+1);
-	if(interface::keys[SDLK_DOWN])
+	if(interface::keys[SDL_SCANCODE_DOWN])
     {
-		if(interface::keys[SDLK_LSHIFT] || interface::keys[SDLK_RSHIFT])
+		if(interface::keys[SDL_SCANCODE_LSHIFT] || interface::keys[SDL_SCANCODE_RSHIFT])
 			client::action(CLIENT_ACCEL,-2);
 		else
 			client::action(CLIENT_ACCEL,-1);
     }
-	if(interface::keys[SDLK_UP])
+	if(interface::keys[SDL_SCANCODE_UP])
     {
-		if(interface::keys[SDLK_LSHIFT] || interface::keys[SDLK_RSHIFT])
+		if(interface::keys[SDL_SCANCODE_LSHIFT] || interface::keys[SDL_SCANCODE_RSHIFT])
 			client::action(CLIENT_ACCEL,+2);
 		else
 			client::action(CLIENT_ACCEL,+1);
     }
 	if(!interface::inp)
 	{
-		if(interface::keys[SDLK_SPACE])
+		if(interface::keys[SDL_SCANCODE_SPACE])
 			client::action(CLIENT_SHOOT,0);
-		if(interface::lasc==SDLK_z)
+		if(interface::scancode==SDL_SCANCODE_Z)
 			client::action(CLIENT_SHOOT,1);
-		if(interface::lasc=='0')
+		if(interface::scancode==SDL_SCANCODE_0)
 			client::action(CLIENT_CONS,0);
-		if(interface::lasc>='1' && interface::lasc<='9')
+		if(interface::scancode>=SDL_SCANCODE_1 && interface::scancode<=SDL_SCANCODE_9)
 			client::action(CLIENT_CONS,interface::lasc-'1'+1);
-		if(interface::lasc=='t')
+		if(interface::scancode==SDL_SCANCODE_T)
 			trg=gettarget(PT_SHIP,+1,camera::cov,false,false);
 		if(interface::lasc=='T')
 			trg=gettarget(PT_SHIP,-1,camera::cov,false,false);
-		if(interface::lasc=='e')
+		if(interface::scancode==SDL_SCANCODE_E)
 			trg=gettarget(PT_SHIP,+1,camera::cov,false,true);
 		if(interface::lasc=='E')
 			trg=gettarget(PT_SHIP,-1,camera::cov,false,true);
-		if(interface::lasc=='p')
+		if(interface::scancode==SDL_SCANCODE_P)
 			trg=gettarget(PT_PLANET,+1,camera::cov,false,false);
 		if(interface::lasc=='P')
 			trg=gettarget(PT_PLANET,-1,camera::cov,false,false);
 		if(trg)
 			client::action(CLIENT_TRG,trg->self);
-		if(interface::lasc=='q')
+		if(interface::lasc==SDL_SCANCODE_Q)
 			throw error("User requested quit");
-		if(interface::keys[SDLK_MINUS])
+		if(interface::keys[SDL_SCANCODE_MINUS])
 			camera::radarzoom(-1);
-		if(interface::keys[SDLK_EQUALS] || interface::lasc=='+')
+		if(interface::keys[SDL_SCANCODE_EQUALS])
 			camera::radarzoom(+1);
-		if(interface::lasc=='/')
+		if(interface::scancode==SDL_SCANCODE_BACKSLASH)
 			camera::viewzoom();
 	}
-	if(interface::lkey>=SDLK_F1 && interface::lkey<=SDLK_F10)
+	if(interface::scancode>=SDL_SCANCODE_F1 && interface::scancode<=SDL_SCANCODE_F10)
 	{
-		client::action(CLIENT_CMOD,interface::lkey-SDLK_F1);
+		client::action(CLIENT_CMOD,interface::scancode-SDL_SCANCODE_F1);
 	}
 }
 

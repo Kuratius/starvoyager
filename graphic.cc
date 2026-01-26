@@ -22,29 +22,71 @@ void graphic::init()
         graphics[i]=NULL;
     nd=0;
 }
-
+SDL_Surface* screen;
+SDL_Window* window = NULL;
+//SDL_Renderer * renderer=NULL;
 void graphic::setup(bool big,bool full)
 {
     Uint32 flags; //Flags for setting video;
     SDL_Surface* tmp; //Temporary holding place while sprites are converted
     char* path; //Path to load bmp from
 
+
+    if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+        
+        throw error(SDL_GetError());
+        //fprintf(stderr, "SDL video init failed: %s\n", SDL_GetError());
+        //return 1;
+    }
+
+// SDL_Surface *screenSurface = SDL_SetVideoMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32, SDL_SWSURFACE);
+#define SCREEN_WIDTH (600)
+#define SCREEN_HEIGHT (400)
+
+    window = SDL_CreateWindow("Star Voyager", 
+        SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 
+        SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+
+    if (window == NULL) {
+        //fprintf(stderr, "Window could not be created: %s\n", SDL_GetError());
+        throw error(SDL_GetError());
+        //return 1;
+    }
+	//renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+	//if (renderer == NULL) {
+	//	fprintf(stdout, "SDL_CreateRenderer Error: %s\n", SDL_GetError());
+        //goto failure; 
+    //    throw error(SDL_GetError());
+	//}
+
+    screen = SDL_GetWindowSurface(window);
+
+    if (!screen) {
+        //fprintf(stderr, "Screen surface could not be created: %s\n", SDL_GetError());
+        throw error(SDL_GetError());
+        SDL_Quit();
+        exit(1);
+        //return 1;
+    }
+
+#if 0
     if(SDL_InitSubSystem(SDL_INIT_VIDEO)==-1)
         throw error(SDL_GetError());
-    flags=SDL_DOUBLEBUF|SDL_HWSURFACE;
+    flags=SDL_GL_DOUBLEBUFFER|SDL_SWSURFACE;
     if(full)
-        flags=flags|SDL_FULLSCREEN;
+        flags=flags|SDL_WINDOW_FULLSCREEN;
     if(big)
         screen=SDL_SetVideoMode(1280,720,0,flags);
     else
         screen=SDL_SetVideoMode(600,400,0,flags);
     if(!screen)
         throw error(SDL_GetError());
+#endif
     crct.x=0;
     crct.y=0;
     crct.w=screen->w;
     crct.h=screen->h;
-    SDL_WM_SetCaption("Star Voyager","Star Voyager");
+    //SDL_WM_SetCaption("Star Voyager","Star Voyager");
     SDL_ShowCursor(0);
 
     cols[BLACK]=SDL_MapRGB(screen->format,0,0,0);
@@ -70,7 +112,8 @@ void graphic::setup(bool big,bool full)
     tmp=SDL_ConvertSurface(font,screen->format,SDL_SWSURFACE);
     SDL_FreeSurface(font);
     font=tmp;
-    SDL_SetColorKey(font,SDL_SRCCOLORKEY|SDL_RLEACCEL,cols[BLACK]);
+    //SDL_SetColorKey(font,SDL_SRCCOLORKEY|SDL_RLEACCEL,cols[BLACK]);
+    SDL_SetColorKey(font,SDL_RLEACCEL,cols[BLACK]);
 
     path=new char[strlen(DATADIR)+32];
     sprintf(path,"%s/gfx/haze.bmp",DATADIR);
@@ -81,12 +124,15 @@ void graphic::setup(bool big,bool full)
     tmp=SDL_ConvertSurface(cloak,screen->format,SDL_SWSURFACE);
     SDL_FreeSurface(cloak);
     cloak=tmp;
-    SDL_SetColorKey(cloak,SDL_SRCCOLORKEY|SDL_RLEACCEL,cols[WHITE]);
+    //SDL_SetColorKey(cloak,SDL_SRCCOLORKEY|SDL_RLEACCEL,cols[WHITE]);
+    SDL_SetColorKey(cloak,SDL_RLEACCEL,cols[WHITE]);
 }
 
 void graphic::blit()
 {
-    SDL_Flip(screen);
+    //SDL_Flip(screen);
+    SDL_UpdateWindowSurface(window);
+    //SDL_RenderPresent(renderer);
 }
 
 graphic* graphic::get(int indx)
@@ -349,7 +395,8 @@ void graphic::load()
     tmp=SDL_ConvertSurface(orig,screen->format,SDL_SWSURFACE);
     SDL_FreeSurface(orig);
     orig=tmp;
-    SDL_SetColorKey(orig,SDL_SRCCOLORKEY|SDL_RLEACCEL,cols[BLACK]);
+    //SDL_SetColorKey(orig,SDL_SRCCOLORKEY|SDL_RLEACCEL,cols[BLACK]);
+    SDL_SetColorKey(orig,SDL_RLEACCEL,cols[BLACK]);
     calculate(0,1);
 }
 
@@ -362,7 +409,8 @@ void graphic::calculate(int rot,short zout)
         rots[rot][zout-1]=rotozoomSurface(orig,ang,1.0/zout,1);
     else
         rots[rot][zout-1]=rotozoomSurface(orig,ang,1.0/zout,0);
-    SDL_SetColorKey(rots[rot][zout-1],SDL_SRCCOLORKEY|SDL_RLEACCEL,cols[BLACK]);
+    //SDL_SetColorKey(rots[rot][zout-1],SDL_SRCCOLORKEY|SDL_RLEACCEL,cols[BLACK]);
+    SDL_SetColorKey(rots[rot][zout-1],SDL_RLEACCEL,cols[BLACK]);
     if(!rots[rot][zout-1])
         throw error(SDL_GetError());
 }
