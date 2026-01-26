@@ -16,6 +16,8 @@
 #include "calc.h"
 #include "interface.h"
 
+int getCharFromSDL_SCANCODE(int scancode);
+
 void interface::init()
 {
 	cons=NULL;
@@ -94,7 +96,7 @@ void interface::poll()
 		{
 			lkey=evnt.key.keysym.sym;
 			scancode=evnt.key.keysym.scancode;
-			lasc=*SDL_GetScancodeName(evnt.key.keysym.scancode);
+			lasc=getCharFromSDL_SCANCODE(evnt.key.keysym.scancode);
 			if(inp)
 				lineedit();
 		}
@@ -254,7 +256,6 @@ unsigned char interface::lasc;
 const uint8_t* interface::keys;
 int interface::scancode;
 
-int getCharFromSDL_SCANCODE(int scancode);
 void interface::lineedit() //Function to handle line-editing
 {
 	if(scancode==SDL_SCANCODE_RETURN)
