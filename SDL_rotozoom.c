@@ -734,7 +734,8 @@ SDL_Surface *rotozoomSurface(SDL_Surface * src, double angle, double zoom, int s
 	    //SDL_SetColorKey(rz_dst, SDL_SRCCOLORKEY | SDL_RLEACCEL, rz_src->format->colorkey);
 	    uint32_t colorkey;
         SDL_GetColorKey(rz_src, &colorkey);
-        SDL_SetColorKey(rz_dst,  SDL_RLEACCEL,colorkey);
+        SDL_SetColorKey(rz_dst,  SDL_TRUE,colorkey);
+        SDL_SetSurfaceRLE(rz_dst, 1);
 	}
 	/*
 	 * Unlock source surface 
@@ -806,7 +807,9 @@ SDL_Surface *rotozoomSurface(SDL_Surface * src, double angle, double zoom, int s
         uint32_t colorkey;
         SDL_GetColorKey(rz_src, &colorkey);
 	    //SDL_SetColorKey(rz_dst, SDL_SRCCOLORKEY | SDL_RLEACCEL, rz_src->format->colorkey);
-	    SDL_SetColorKey(rz_dst, SDL_RLEACCEL,colorkey);
+	    //SDL_SetColorKey(rz_dst, SDL_RLEACCEL,colorkey);
+        SDL_SetColorKey(rz_dst,  SDL_TRUE,colorkey);
+        SDL_SetSurfaceRLE(rz_dst, 1);
 	}
 	/*
 	 * Unlock source surface 
@@ -954,7 +957,9 @@ SDL_Surface *zoomSurface(SDL_Surface * src, double zoomx, double zoomy, int smoo
     uint32_t colorkey;
     SDL_GetColorKey(rz_src, &colorkey);
 	//SDL_SetColorKey(rz_dst, SDL_SRCCOLORKEY | SDL_RLEACCEL, rz_src->format->colorkey);
-	SDL_SetColorKey(rz_dst, SDL_RLEACCEL, colorkey);
+	//SDL_SetColorKey(rz_dst, SDL_RLEACCEL, colorkey);
+    SDL_SetColorKey(rz_dst,  SDL_TRUE,colorkey);
+    SDL_SetSurfaceRLE(rz_dst, 1);
     }
     /*
      * Unlock source surface 

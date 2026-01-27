@@ -113,7 +113,9 @@ void graphic::setup(bool big,bool full)
     SDL_FreeSurface(font);
     font=tmp;
     //SDL_SetColorKey(font,SDL_SRCCOLORKEY|SDL_RLEACCEL,cols[BLACK]);
-    SDL_SetColorKey(font,SDL_RLEACCEL,cols[BLACK]);
+    //SDL_SetColorKey(font,SDL_RLEACCEL,cols[BLACK]);
+    SDL_SetColorKey(font,  SDL_TRUE,cols[BLACK]);
+    SDL_SetSurfaceRLE(font, 1);
 
     path=new char[strlen(DATADIR)+32];
     sprintf(path,"%s/gfx/haze.bmp",DATADIR);
@@ -125,7 +127,8 @@ void graphic::setup(bool big,bool full)
     SDL_FreeSurface(cloak);
     cloak=tmp;
     //SDL_SetColorKey(cloak,SDL_SRCCOLORKEY|SDL_RLEACCEL,cols[WHITE]);
-    SDL_SetColorKey(cloak,SDL_RLEACCEL,cols[WHITE]);
+    SDL_SetColorKey(cloak,SDL_TRUE,cols[WHITE]);
+    SDL_SetSurfaceRLE(cloak, 1);
 }
 
 void graphic::blit()
@@ -396,7 +399,8 @@ void graphic::load()
     SDL_FreeSurface(orig);
     orig=tmp;
     //SDL_SetColorKey(orig,SDL_SRCCOLORKEY|SDL_RLEACCEL,cols[BLACK]);
-    SDL_SetColorKey(orig,SDL_RLEACCEL,cols[BLACK]);
+    SDL_SetColorKey(orig,SDL_TRUE,cols[BLACK]);
+    SDL_SetSurfaceRLE(orig, 1);
     calculate(0,1);
 }
 
@@ -410,7 +414,8 @@ void graphic::calculate(int rot,short zout)
     else
         rots[rot][zout-1]=rotozoomSurface(orig,ang,1.0/zout,0);
     //SDL_SetColorKey(rots[rot][zout-1],SDL_SRCCOLORKEY|SDL_RLEACCEL,cols[BLACK]);
-    SDL_SetColorKey(rots[rot][zout-1],SDL_RLEACCEL,cols[BLACK]);
+    SDL_SetColorKey(rots[rot][zout-1],SDL_TRUE,cols[BLACK]);
+    SDL_SetSurfaceRLE(rots[rot][zout-1], 1);
     if(!rots[rot][zout-1])
         throw error(SDL_GetError());
 }
