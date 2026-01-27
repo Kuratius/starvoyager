@@ -176,7 +176,7 @@ void splashscreen()
         }
         poll.tick();
         interface::poll();
-        SDL_Texture * tex=NULL;
+        //SDL_Texture * tex=NULL;
         switch(interface::scancode)
         {
             case SDL_SCANCODE_1:

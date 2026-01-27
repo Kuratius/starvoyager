@@ -27,7 +27,7 @@ SDL_Window* window = NULL;
 //SDL_Renderer * renderer=NULL;
 void graphic::setup(bool big,bool full)
 {
-    Uint32 flags; //Flags for setting video;
+    //Uint32 flags; //Flags for setting video;
     SDL_Surface* tmp; //Temporary holding place while sprites are converted
     char* path; //Path to load bmp from
 

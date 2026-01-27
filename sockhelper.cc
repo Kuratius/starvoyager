@@ -23,7 +23,7 @@ sockhelper::sockhelper(TCPsocket sock)
 	take=0;
 	cnt=0;
 	blck=false;
-	alrm=NULL;
+	alrm=0;
 }
 
 sockhelper::~sockhelper()
@@ -56,7 +56,7 @@ void sockhelper::pump()
 		cnt+=r;
 		ins+=r;
 	}
-	alrm=NULL;
+	alrm=0;
 	if(blck)
 		throw error("Socket blocked: probably a laggy/hung/cracked client");
 }
