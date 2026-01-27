@@ -9,8 +9,8 @@ CPPC=c++
 CC=cc
 UNAME := $(shell uname -m)
 LIBS:=`sdl2-config --libs` -lSDL2_net -lSDL2 -lSDL2_ttf -lstdc++ -lm -pg
-CFLAGS:=`sdl2-config --cflags` -Wall -ggdb3 -pg -static 
-CFLAGS += -Os -fmax-errors=1 -D_REENTRANT
+CFLAGS:=`sdl2-config --cflags` -Wall -ggdb3 -pg 
+CFLAGS += -Os -fmax-errors=1
 CXXFLAGS= $(CFLAGS)
 #CFLAGS:=`sdl-config --cflags` -ggdb3 -Wall -Werror -ansi -pedantic
 PACKAGENAME=$(NAME)-$(VERSION)-`uname -m`-`uname|tr [A-Z] [a-z]`.bin
