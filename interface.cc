@@ -97,6 +97,8 @@ void interface::poll()
 			lkey=evnt.key.keysym.sym;
 			scancode=evnt.key.keysym.scancode;
 			lasc=getCharFromSDL_SCANCODE(evnt.key.keysym.scancode);
+            if (keys[SDL_SCANCODE_LSHIFT])
+                lasc=toupper(lasc);
 			if(inp)
 				lineedit();
 		}
@@ -265,6 +267,7 @@ void interface::lineedit() //Function to handle line-editing
 	}
 	if(scancode==SDL_SCANCODE_BACKSPACE)
 	{
+        //printf("tried to remove character\n");
 		for(int i=1;i<65;i++)
 		{
 			if(edit[i]=='\0')
@@ -369,7 +372,7 @@ int getCharFromSDL_SCANCODE(int scancode){
         case SDL_SCANCODE_Z:
             return 'Z';
         default:
-        return '?';
+        return 0;
     }   
 
 

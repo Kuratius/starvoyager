@@ -187,27 +187,27 @@ void presence::controls()
 	{
 		if(interface::keys[SDL_SCANCODE_SPACE])
 			client::action(CLIENT_SHOOT,0);
-		if(interface::scancode==SDL_SCANCODE_Z)
+		if(interface::lasc=='z')
 			client::action(CLIENT_SHOOT,1);
-		if(interface::scancode==SDL_SCANCODE_0)
+		if(interface::lasc=='0')
 			client::action(CLIENT_CONS,0);
-		if(interface::scancode>=SDL_SCANCODE_1 && interface::scancode<=SDL_SCANCODE_9)
+		if(interface::lasc>='1' && interface::lasc<='9')
 			client::action(CLIENT_CONS,interface::lasc-'1'+1);
-		if(interface::scancode==SDL_SCANCODE_T)
+		if(interface::lasc=='t')
 			trg=gettarget(PT_SHIP,+1,camera::cov,false,false);
 		if(interface::lasc=='T')
 			trg=gettarget(PT_SHIP,-1,camera::cov,false,false);
-		if(interface::scancode==SDL_SCANCODE_E)
+		if(interface::lasc=='e')
 			trg=gettarget(PT_SHIP,+1,camera::cov,false,true);
 		if(interface::lasc=='E')
 			trg=gettarget(PT_SHIP,-1,camera::cov,false,true);
-		if(interface::scancode==SDL_SCANCODE_P)
+		if(interface::lasc=='p')
 			trg=gettarget(PT_PLANET,+1,camera::cov,false,false);
 		if(interface::lasc=='P')
 			trg=gettarget(PT_PLANET,-1,camera::cov,false,false);
 		if(trg)
 			client::action(CLIENT_TRG,trg->self);
-		if(interface::lasc==SDL_SCANCODE_Q)
+		if(interface::lasc=='q')
 			throw error("User requested quit");
 		if(interface::keys[SDL_SCANCODE_MINUS])
 			camera::radarzoom(-1);
