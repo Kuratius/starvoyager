@@ -193,7 +193,7 @@ void presence::controls()
 			client::action(CLIENT_CONS,0);
 		if(interface::lasc>='1' && interface::lasc<='9')
 			client::action(CLIENT_CONS,interface::lasc-'1'+1);
-		if(interface::lasc=='t')
+		if(interface::scancode==SDL_SCANCODE_T)
 			trg=gettarget(PT_SHIP,+1,camera::cov,false,false);
 		if(interface::lasc=='T')
 			trg=gettarget(PT_SHIP,-1,camera::cov,false,false);

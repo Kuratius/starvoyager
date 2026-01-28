@@ -88,6 +88,7 @@ void interface::poll()
 	int n; //Unused area for the argument for SDL_GetKeyState
 	lkey=-1;
 	lasc=0;
+    scancode=0;
 	SDL_PumpEvents();
 	keys=SDL_GetKeyboardState(&n);
 	while(lkey==-1 && SDL_PollEvent(&evnt))
