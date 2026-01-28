@@ -323,55 +323,57 @@ int getCharFromSDL_SCANCODE(int scancode){
         case SDL_SCANCODE_9:
             return '9';
         case SDL_SCANCODE_A:
-            return 'A';
+            return 'a';
         case SDL_SCANCODE_B:
-            return 'B';
+            return 'b';
         case SDL_SCANCODE_C:
-            return 'C';
+            return 'c';
         case SDL_SCANCODE_D:
-            return 'D';
+            return 'd';
         case SDL_SCANCODE_E:
-            return 'E';
+            return 'e';
         case SDL_SCANCODE_F:
-            return 'F';
+            return 'f';
         case SDL_SCANCODE_G:
-            return 'G';
+            return 'g';
         case SDL_SCANCODE_H:
-            return 'H';
+            return 'h';
         case SDL_SCANCODE_I:
-            return 'I';
+            return 'i';
         case SDL_SCANCODE_J:
-            return 'J';
+            return 'j';
         case SDL_SCANCODE_K:
-            return 'K';
+            return 'k';
         case SDL_SCANCODE_L:
-            return 'L';
+            return 'l';
         case SDL_SCANCODE_M:
-            return 'M';
+            return 'm';
         case SDL_SCANCODE_N:
-            return 'N';
+            return 'n';
         case SDL_SCANCODE_O:
-            return 'O';
+            return 'o';
         case SDL_SCANCODE_P:
-            return 'P';
+            return 'p';
         case SDL_SCANCODE_Q:
-            return 'Q';
+            return 'q';
         case SDL_SCANCODE_R:
-            return 'R';
+            return 'r';
         case SDL_SCANCODE_S:
-            return 'S';
+            return 's';
         case SDL_SCANCODE_T:
-            return 'T';
+            return 't';
         case SDL_SCANCODE_U:
-            return 'U';
+            return 'u';
         case SDL_SCANCODE_V:
-            return 'V';
+            return 'v';
+        case SDL_SCANCODE_W:
+            return 'w';
         case SDL_SCANCODE_X:
-            return 'X';
+            return 'x';
         case SDL_SCANCODE_Y:
-            return 'Y';
+            return 'y';
         case SDL_SCANCODE_Z:
-            return 'Z';
+            return 'z';
         default:
         return 0;
     }   
